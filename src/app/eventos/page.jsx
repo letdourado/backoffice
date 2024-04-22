@@ -25,12 +25,12 @@ export default function Eventos() {
         event.preventDefault();
         console.log(data)
         try {
-            await axios.post('@/api/index', data);
+            await axios.post('/api', data);
             setData({
-                nome: '',
-                data: '',
-                local: '',
-                descricao: ''
+                nome: data.nome,
+                data: data.data,
+                local: data.local,
+                descricao: data.descricao
             });
         } catch (error) {
             console.error('Erro ao cadastrar evento:', error);
@@ -41,7 +41,7 @@ export default function Eventos() {
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
             <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
                 <h2>Cadastro de Evento</h2>
-                <form onSubmit={enviarForm}>
+                <form onSubmit={enviarForm} method="POST">
                     <div className="mb-4">
                         <label htmlFor="nome">Nome do Evento:</label>
                         <input type="text" id="nome" name="nome" onChange={handleChange} />
@@ -60,6 +60,7 @@ export default function Eventos() {
                     </div>
                     <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cadastrar</button>
                 </form>
+                
             </div>
         </main>
     );
